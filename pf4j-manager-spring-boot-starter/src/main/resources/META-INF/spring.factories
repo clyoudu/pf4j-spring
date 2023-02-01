@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  github.clyoudu.pf4jspring.config.Pf4jConfiguration

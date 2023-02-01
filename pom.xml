@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.8</version>
+    </parent>
+
+    <groupId>github.clyoudu.pf4jspring</groupId>
+    <artifactId>pf4j-spring</artifactId>
+    <version>${pf4j-spring.version}</version>
+    <packaging>pom</packaging>
+
+    <name>pf4j-spring</name>
+    <url>https://github.com/clyoudu/pf4j-spring</url>
+    <modules>
+        <module>pf4j-manager-spring-boot-starter</module>
+        <module>demo</module>
+        <module>demo/plugins</module>
+        <module>pf4j-spring-core</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <pf4j-spring.version>1.0.0-SNAPSHOT</pf4j-spring.version>
+
+        <pf4j.version>3.8.0</pf4j.version>
+        <spring-boot.version>2.5.8</spring-boot.version>
+        <fastjson.version>2.0.23</fastjson.version>
+    </properties>
+</project>

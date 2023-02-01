@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>github.clyoudu.pf4jspring</groupId>
+        <artifactId>pf4j-spring</artifactId>
+        <version>${pf4j-spring.version}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>pf4j-manager-spring-boot-starter</artifactId>
+    <packaging>jar</packaging>
+
+    <name>pf4j-manager-spring-boot-starter</name>
+    <url>https://github.com/clyoudu/pf4j-spring</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>github.clyoudu.pf4jspring</groupId>
+            <artifactId>pf4j-spring-core</artifactId>
+            <version>${pf4j-spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

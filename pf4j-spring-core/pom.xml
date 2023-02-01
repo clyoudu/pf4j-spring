@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>github.clyoudu.pf4jspring</groupId>
+        <artifactId>pf4j-spring</artifactId>
+        <version>${pf4j-spring.version}</version>
+    </parent>
+
+    <artifactId>pf4j-spring-core</artifactId>
+    <packaging>jar</packaging>
+
+    <name>pf4j-core</name>
+    <url>https://github.com/clyoudu/pf4j-spring</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.pf4j</groupId>
+            <artifactId>pf4j</artifactId>
+            <version>${pf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

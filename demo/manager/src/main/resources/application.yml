@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  pf4j:
+    enabled: true
+    path: /Users/leichen/ideaworkspace/pf4j-spring/demo/manager/plugins
+  thymeleaf:
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    cache: false
+    suffix: .html
+    servlet:
+      content-type: text/html
+logging:
+  level:
+    org.pf4j: debug

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+<div id="main">
+    <strong>Plugin Management</strong>
+    <div style="margin-top: 10px;margin-bottom: 5px">
+        <form id="uploadForm" method="post" enctype="multipart/form-data" class="easyui-form"
+              data-options="novalidate:true">
+            <input type="file" name="file" id="file"/>
+            <input type="button" onclick="upload()" value="Upload"/>
+            <input type="button" onclick="reload()" value="Reload"/>
+        </form>
+    </div>
+    <div id="plugins"></div>
+    <br/>
+    <br/>
+    <strong>Business Feature</strong>
+    <div id="biz" style="margin-top: 5px">
+        <button onclick="buttonClick('Default Button', 'Default msg')">Default Button</button>
+    </div>
+</div>
+</body>
+<script>
+
+    function extButtonClick(name) {
+        $.get('ext/click?extensionClass=github.clyoudu.pf4jspring.api.OperationButtonExtension&name=' + name, function(data) {
+            $.messager.alert(name, data, 'info');
+        })
+    }
+
+    function buttonClick(name,msg){
+        $.messager.alert(name, msg, 'info');
+    }
+    function pluginOp(op, pluginId) {
+        $.get('plugin/' + op + '?pluginId=' + pluginId);
+        window.location.reload();
+    }
+
+    function upload() {
+        if (!$('#file').get(0).files[0]) {
+            $.messager.alert('Info', "Please choose one plugin package", 'warning');
+            return;
+        }
+        $('#uploadForm').form('submit', {
+            url: "plugin/upload",
+            success: function (result) {
+                $.messager.alert('Info', "Please click 'Reload' button to load uploaded plugins", 'info');
+            }
+        });
+
+    }
+
+    function reload() {
+        $.get('plugin/reload');
+        window.location.reload();
+    }
+
+    $(document).ready(function () {
+        $('#plugins').datagrid({
+            url: 'plugin/list',
+            method: 'GET',
+            striped: true,
+            fitColumns: true,
+            pagination: false,
+            columns: [
+                [
+                    {field: 'id', title: 'ID'},
+                    {field: 'version', title: 'Version'},
+                    {field: 'path', title: 'Path'},
+                    {field: 'class', title: 'Class'},
+                    {field: 'state', title: 'State'},
+                    {
+                        field: 'action', title: 'Operation', formatter: function (value, row, index) {
+                            var html;
+                            if (row.state === 'FAILED') {
+                                html = '<a href="javascript: void(0);" onclick="pluginOp(\'load\',\'' + row.id + '\')">Load</a>'
+                            } else {
+                                html = '<a href="javascript: void(0);" onclick="pluginOp(\'unload\',\'' + row.id + '\')">Unload</a>';
+                            }
+                            if (row.state === 'RESOLVED' || row.state === 'CREATED' || row.state === 'DISABLED' || row.state === 'STOPPED') {
+                                html += ' <a href="javascript: void(0);" onclick="pluginOp(\'start\',\'' + row.id + '\')">Start</a>'
+                            }
+                            if (row.state === 'STARTED') {
+                                html += ' <a href="javascript: void(0);" onclick="pluginOp(\'stop\',\'' + row.id + '\')">Stop</a>'
+                            }
+                            if (row.state === 'STARTED' || row.state === 'CREATED') {
+                                html += ' <a href="javascript: void(0);" onclick="pluginOp(\'disable\',\'' + row.id + '\')">Disable</a>'
+                            }
+                            if (row.state === 'DISABLED') {
+                                html += ' <a href="javascript: void(0);" onclick="pluginOp(\'enable\',\'' + row.id + '\')">Enable</a>'
+                            }
+                            if (row.state !== 'STARTED') {
+                                html += ' <a href="javascript: void(0);" onclick="pluginOp(\'delete\',\'' + row.id + '\')">Delete</a>'
+                            }
+                            return html;
+                        }
+                    }
+                ]
+            ]
+        });
+        $.get('ext/list?extensionClass=github.clyoudu.pf4jspring.api.OperationButtonExtension', function(data) {
+            for (let i = 0; i < data.length; i++) {
+                let ext = data[i];
+                $('#biz').append(' <button onclick="extButtonClick(\'' + ext.name + '\')">' + ext.name + '</button>');
+            }
+        })
+    });
+</script>
+</html>
